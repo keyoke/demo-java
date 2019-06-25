@@ -67,17 +67,10 @@
       <Add displayName="Thread Count(JMX)"
         objectName="java.lang:type=Threading"
         attribute="ThreadCount" />
-      <Add displayName="Used Heap Memory(JMX)"
-        objectName="java.lang:type=Memory"
-        attribute="HeapMemoryUsage.used"
-        type="COMPOSITE" />
       <Add displayName="Initial Heap Memory(JMX)"
         objectName="java.lang:type=Memory"
         attribute="HeapMemoryUsage.init" 
         type="COMPOSITE"/>
-      <Add displayName="GC MarkSweep Time(JMX)" 
-        objectName="java.lang:name=PS MarkSweep,type=GarbageCollector"
-        attribute="CollectionTime" /> 
       <Add displayName="Current Loaded Class Count(JMX)"
         objectName="java.lang:type=ClassLoading"
         attribute="LoadedClassCount" /> 
