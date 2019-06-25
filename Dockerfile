@@ -10,7 +10,21 @@ RUN apt-get update && \
     vim && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
-RUN echo "export JAVA_OPTS=\"-Dapp.env=staging\"" > /usr/local/tomcat/bin/setenv.sh
+# Replace this with the current version
+ARG APPINSIGHTS_VERSION
+ENV AGENT_JAR_NAME applicationinsights-agent-${APPINSIGHTS_VERSION}.jar
+ENV AI_WEB_JAR_NAME applicationinsights-web-${APPINSIGHTS_VERSION}.jar
+
+# https://github.com/microsoft/ApplicationInsights-Java/wiki/Using-Application-Insights-in-a-Dockerfile
+# Get The Application Insights Agent JAR via curl, it should exist outside the Tomcat's and your application's classpath.
+RUN curl -L --create-dirs -o /opt/aiagent/${AGENT_JAR_NAME} https://github.com/microsoft/ApplicationInsights-Java/releases/download/${APPINSIGHTS_VERSION}/${AGENT_JAR_NAME}
+COPY AI-Agent.xml /opt/aiagent/AI-Agent.xml
+RUN curl -L -o ${CATALINA_HOME}/lib/${AI_WEB_JAR_NAME} https://github.com/microsoft/ApplicationInsights-Java/releases/download/${APPINSIGHTS_VERSION}/${AI_WEB_JAR_NAME}
+COPY ApplicationInsights.xml ${CATALINA_HOME}/lib/ApplicationInsights.xml
+
+RUN echo 'export JAVA_OPTS="${JAVA_OPTS} -Dapp.env=staging -javaagent:/opt/aiagent/${AGENT_JAR_NAME}"'> /usr/local/tomcat/bin/setenv.sh
+
+RUN chmod 711 /usr/local/tomcat/bin/setenv.sh
 COPY pkg/demo.war /usr/local/tomcat/webapps/demo.war
 
 EXPOSE 8080
