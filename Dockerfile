@@ -11,7 +11,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get purge
 
 # Replace this with the current version
-ENV APPINSIGHTS_VERSION 2.3.1
+ARG APPINSIGHTS_VERSION
 ENV AGENT_JAR_NAME applicationinsights-agent-${APPINSIGHTS_VERSION}.jar
 
 # https://github.com/microsoft/ApplicationInsights-Java/wiki/Using-Application-Insights-in-a-Dockerfile
