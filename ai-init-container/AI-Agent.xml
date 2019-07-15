@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <ApplicationInsightsAgent>
+      <AgentLogger />
       <!-- Enable AI to run in Self-Mode -->
       <SelfMode enabled="true" sdkPath="/shared-ai-agent/applicationinsights-core.jar" />
       <Instrumentation>
