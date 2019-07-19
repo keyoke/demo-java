@@ -18,7 +18,7 @@ RUN apt-get update && \
     curl \
     software-properties-common
 
-# We also need Java 7 JRE to perform the build of AI
+# Really nasty hack could be done better Im sure! We need Java 7 JRE to perform the build of AI, there is no gradle tag for 7.
 RUN mkdir /tmp/java7/
 RUN curl -o /tmp/java7/openjdk-7-jre_7u181-2.6.14-1~deb8u1_amd64.deb http://ftp.de.debian.org/debian/pool/main/o/openjdk-7/openjdk-7-jre_7u181-2.6.14-1~deb8u1_amd64.deb && \
     curl -o /tmp/java7/openjdk-7-jre-headless_7u181-2.6.14-1~deb8u1_amd64.deb http://ftp.de.debian.org/debian/pool/main/o/openjdk-7/openjdk-7-jre-headless_7u181-2.6.14-1~deb8u1_amd64.deb && \
@@ -29,6 +29,10 @@ RUN curl -o /tmp/java7/openjdk-7-jre_7u181-2.6.14-1~deb8u1_amd64.deb http://ftp.
 
 ENV JAVA_JRE_7 /usr/lib/jvm/java-7-openjdk-amd64/jre
 RUN export JAVA_JRE_7
+
+# Tweak our jvm options for the build
+ENV GRADLE_OPTS "-Xmx1024m -Xms1024m -Dorg.gradle.daemon=false"
+RUN export GRADLE_OPTS
 
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
