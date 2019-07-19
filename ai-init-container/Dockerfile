@@ -31,7 +31,7 @@ ENV JAVA_JRE_7 /usr/lib/jvm/java-7-openjdk-amd64/jre
 RUN export JAVA_JRE_7
 
 # Tweak our jvm options for the build
-ENV GRADLE_OPTS "-Xmx1024m -Xms1024m -Dorg.gradle.daemon=false"
+ENV GRADLE_OPTS "-Xmx256m -Xms256m -Dorg.gradle.daemon=false"
 RUN export GRADLE_OPTS
 
 COPY --chown=gradle:gradle . /home/gradle/src
