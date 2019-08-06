@@ -1,11 +1,4 @@
 {
-    "connectionString": "",
-    "roleName": "demo-java",
-    "roleInstance": "",
-    "telemetryContext": {
-        "k8s.pod.name": "demo-java",
-        "k8s.pod.namespace": "applications"
-    },
     "jmxMetrics": [
         {
             "objectName": "java.lang:type=Threading",
