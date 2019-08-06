@@ -1,9 +1,6 @@
 # First lets build the 
 FROM gradle:5.5-jdk8 as builder
 
-# Pass in the version for current codeless agent
-ARG AI_AGENT_CODELESS_VERSION=2.5.0-BETA.3
-
 #ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Zurich
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -46,6 +43,8 @@ WORKDIR /home/gradle/src/ApplicationInsights-Java
 RUN gradle build -x test -DskipWinNative=true -DisBuildServer=true
 
 FROM alpine
+# Pass in the version for current codeless agent
+ARG AI_AGENT_CODELESS_VERSION=2.5.0-BETA.3
 COPY --from=builder /home/gradle/src/ApplicationInsights-Java/agent-codeless/build/libs/applicationinsights-agent-codeless-${AI_AGENT_CODELESS_VERSION}-SNAPSHOT.jar /opt/aiagent/applicationinsights-agent.jar
 COPY ApplicationInsights.json /opt/aiagent/ApplicationInsights.json
 
