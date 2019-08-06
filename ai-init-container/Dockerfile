@@ -44,7 +44,7 @@ RUN gradle build -x test -DskipWinNative=true -DisBuildServer=true
 
 FROM alpine
 COPY --from=builder /home/gradle/src/ApplicationInsights-Java/agent-codeless/build/libs/applicationinsights-agent-codeless-2.5.0-BETA-SNAPSHOT.jar /opt/aiagent/applicationinsights-agent.jar
-COPY AI-Agent.xml /opt/aiagent/AI-Agent.xml
+COPY ApplicationInsights.json /opt/aiagent/ApplicationInsights.json
 
 COPY init-container.sh /tmp/
 ENTRYPOINT ["sh","/tmp/init-container.sh"]
