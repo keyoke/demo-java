@@ -38,8 +38,8 @@ spec:
     env:
     - name: APPLICATION_INSIGHTS_IKEY
       value: "[AppInsights IKEY]"
-    - name: CATALINA_OPTS
-      value: '-javaagent:/shared-ai-agent/applicationinsights-agent.jar'
+    - name: _JAVA_OPTIONS
+      value: "-javaagent:/shared-ai-agent/applicationinsights-agent.jar -DapplicationInsights.configurationFile=/shared-ai-agent/ApplicationInsights.json"
     volumeMounts:
     - name: shared-ai-agent
       mountPath: /shared-ai-agent/
