@@ -1,19 +1,23 @@
 {
-    "jmxMetrics": [
-        {
-            "objectName": "java.lang:type=Threading",
-            "attribute": "ThreadCount",
-            "display": "Thread Count(JMX)"
-        },
-        {
-            "objectName": "java.lang:type=Memory",
-            "attribute": "HeapMemoryUsage.init",
-            "display": "Initial Heap Memory(JMX)"
-        },
-        {
-            "objectName": "java.lang:type=ClassLoading",
-            "attribute": "LoadedClassCount",
-            "display": "Current Loaded Class Count(JMX)"
+    "instrumentationSettings": {
+        "preview": {
+            "jmxMetrics": [
+            {
+                "objectName": "java.lang:type=Threading",
+                "attribute": "ThreadCount",
+                "display": "Thread Count(JMX)"
+            },
+            {
+                "objectName": "java.lang:type=Memory",
+                "attribute": "HeapMemoryUsage.init",
+                "display": "Initial Heap Memory(JMX)"
+            },
+            {
+                "objectName": "java.lang:type=ClassLoading",
+                "attribute": "LoadedClassCount",
+                "display": "Current Loaded Class Count(JMX)"
+            }
+          ]
         }
-    ]
+      }
 }
