@@ -1,6 +1,15 @@
 {
     "instrumentationSettings": {
         "preview": {
+            "instrumentation": {
+                "logging": {
+                  "threshold": "TRACE"
+                }
+            },
+            "selfDiagnostics": {
+                "destination": "console",
+                "level": "WARN"
+            },
             "jmxMetrics": [
             {
                 "objectName": "java.lang:type=Threading",
